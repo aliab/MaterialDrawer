@@ -1,5 +1,5 @@
 # Hamsaa RTL Material Drawer
-[![](https://jitpack.io/v/aliab/circular-music-progressbar.svg)](https://jitpack.io/#aliab/circular-music-progressbar)
+[![](https://jitpack.io/v/hamsaadev/MaterialDrawer.svg)](https://jitpack.io/#hamsaadev/MaterialDrawer)
 
 ## Description
 

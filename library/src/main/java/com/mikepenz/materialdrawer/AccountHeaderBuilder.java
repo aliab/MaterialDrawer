@@ -387,6 +387,17 @@ public class AccountHeaderBuilder {
     }
 
     /**
+     * set the profile image for the header
+     *
+     * @param headerProfileImage
+     * @return
+     */
+    public AccountHeaderBuilder withHeaderProfileImage(String headerProfileImage) {
+        this.mHeaderProfileImage = new ImageHolder(headerProfileImage);
+        return this;
+    }
+
+    /**
      * set the background for the slider as color
      *
      * @param headerProfileImage

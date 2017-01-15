@@ -3,6 +3,7 @@ package com.mikepenz.materialdrawer.model;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -41,13 +42,16 @@ public class ProfileDrawerItem extends AbstractDrawerItem<ProfileDrawerItem, Pro
 
     protected StringHolder name;
     protected StringHolder email;
+    private StringHolder orgSubtitle;
 
     protected ColorHolder selectedColor;
     protected ColorHolder textColor;
     protected ColorHolder selectedTextColor;
-    protected ColorHolder disabledTextColor;
 
+    protected ColorHolder disabledTextColor;
     protected Typeface typeface = null;
+    private ImageHolder profileBackgroundImage;
+    private int backgroundColor;
 
     @Override
     public ProfileDrawerItem withIcon(Drawable icon) {
@@ -74,6 +78,36 @@ public class ProfileDrawerItem extends AbstractDrawerItem<ProfileDrawerItem, Pro
     }
 
     @Override
+    public ProfileDrawerItem withBackgroundImage(Drawable icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
+    public ProfileDrawerItem withBackgroundImage(Bitmap icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
+    public ProfileDrawerItem withBackgroundImage(@DrawableRes int icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
+    public ProfileDrawerItem withBackgroundImage(String icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
+    public ProfileDrawerItem withBackgroundImage(Uri icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
     public ProfileDrawerItem withIcon(String url) {
         this.icon = new ImageHolder(url);
         return this;
@@ -95,12 +129,12 @@ public class ProfileDrawerItem extends AbstractDrawerItem<ProfileDrawerItem, Pro
         return this;
     }
 
-  /**
-   * Whether to show the profile name in the account switcher.
-   *
-   * @param nameShown show name in switcher
-   * @return the {@link ProfileDrawerItem}
-   */
+    /**
+     * Whether to show the profile name in the account switcher.
+     *
+     * @param nameShown show name in switcher
+     * @return the {@link ProfileDrawerItem}
+     */
     public ProfileDrawerItem withNameShown(boolean nameShown) {
         this.nameShown = nameShown;
         return this;
@@ -181,12 +215,45 @@ public class ProfileDrawerItem extends AbstractDrawerItem<ProfileDrawerItem, Pro
     }
 
     @Override
+    public ImageHolder getBackgroundImage() {
+        return profileBackgroundImage;
+    }
+
+    @Override
+    public int getBackgroundColor() {
+        return this.backgroundColor;
+    }
+
+    @Override
+    public ProfileDrawerItem withBackgroundColor(@ColorInt int color) {
+        this.backgroundColor = color;
+        return this;
+    }
+
+    @Override
+    public ProfileDrawerItem withBackgroundColor(String color) {
+        this.backgroundColor = Color.parseColor(color);
+        return this;
+    }
+
+    @Override
     public StringHolder getName() {
         return name;
     }
 
     public StringHolder getEmail() {
         return email;
+    }
+
+    @Override
+    public ProfileDrawerItem withOrgSubtitle(String orgSubtitle) {
+        this.orgSubtitle = new StringHolder(orgSubtitle);
+        return this;
+    }
+
+    @Override
+    public StringHolder getOrgSubtitle() {
+        return orgSubtitle;
     }
 
     @Override

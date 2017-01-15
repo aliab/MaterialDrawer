@@ -2,4 +2,5 @@
 <resources>
     <string name="material_drawer_open">Open</string>
     <string name="material_drawer_close">Close</string>
+    <string name="your_active_org">سازمان انتخابی شما:</string>
 </resources>

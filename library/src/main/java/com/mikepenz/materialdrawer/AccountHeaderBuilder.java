@@ -2,6 +2,7 @@ package com.mikepenz.materialdrawer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -54,6 +55,7 @@ public class AccountHeaderBuilder {
     protected ImageView mAccountSwitcherArrow;
     protected TextView mCurrentProfileName;
     protected TextView mCurrentProfileEmail;
+    protected TextView mCurrentProfileEmailSubtitle;
     protected BezelImageView mProfileFirstView;
     protected BezelImageView mProfileSecondView;
     protected BezelImageView mProfileThirdView;
@@ -71,6 +73,11 @@ public class AccountHeaderBuilder {
 
     // the activity to use
     protected Activity mActivity;
+    private StringHolder headerOrgSubtitle;
+    private ImageHolder mHeaderProfileImage;
+    private ImageView mAccountHeaderProfileImage;
+    private ImageView.ScaleType mHeaderProfileImageScaleType = null;
+    private ImageView mCurrentBackgroundColor;
 
     /**
      * Pass the activity you use the drawer in ;)
@@ -105,6 +112,9 @@ public class AccountHeaderBuilder {
 
     // the typeface used for email textView only. overrides mTypeface
     protected Typeface mEmailTypeface;
+
+    // the typeface used for email textView only. overrides mTypeface
+    protected Typeface mEmailSubtitleTypeface;
 
     /**
      * Define the typeface which will be used for all textViews in the AccountHeader
@@ -365,6 +375,33 @@ public class AccountHeaderBuilder {
         return this;
     }
 
+    /**
+     * set the profile image for the header
+     *
+     * @param headerProfileImage
+     * @return
+     */
+    public AccountHeaderBuilder withHeaderProfileImage(@DrawableRes int headerProfileImage) {
+        this.mHeaderProfileImage = new ImageHolder(headerProfileImage);
+        return this;
+    }
+
+    /**
+     * set the background for the slider as color
+     *
+     * @param headerProfileImage
+     * @return
+     */
+    public AccountHeaderBuilder withHeaderProfileImage(Drawable headerProfileImage) {
+        this.mHeaderProfileImage = new ImageHolder(headerProfileImage);
+        return this;
+    }
+
+    public AccountHeaderBuilder withOrgSubtitle(String s) {
+        this.headerOrgSubtitle = new StringHolder(s);
+        return this;
+    }
+
     //background scale type
     protected ImageView.ScaleType mHeaderBackgroundScaleType = null;
 
@@ -376,6 +413,17 @@ public class AccountHeaderBuilder {
      */
     public AccountHeaderBuilder withHeaderBackgroundScaleType(ImageView.ScaleType headerBackgroundScaleType) {
         this.mHeaderBackgroundScaleType = headerBackgroundScaleType;
+        return this;
+    }
+
+    /**
+     * define the ScaleType for the header Profile Image
+     *
+     * @param headerBackgroundScaleType
+     * @return
+     */
+    public AccountHeaderBuilder withHeaderProfileImageScaleType(ImageView.ScaleType headerBackgroundScaleType) {
+        this.mHeaderProfileImageScaleType = headerBackgroundScaleType;
         return this;
     }
 
@@ -805,11 +853,17 @@ public class AccountHeaderBuilder {
 
         // get the background view
         mAccountHeaderBackground = (ImageView) mAccountHeaderContainer.findViewById(R.id.material_drawer_account_header_background);
+        mAccountHeaderProfileImage = (ImageView) mAccountHeaderContainer.findViewById(R.id.material_drawer_account_header_profile);
         // set the background
         ImageHolder.applyTo(mHeaderBackground, mAccountHeaderBackground, DrawerImageLoader.Tags.ACCOUNT_HEADER.name());
+        ImageHolder.applyTo(mHeaderProfileImage, mAccountHeaderProfileImage, DrawerImageLoader.Tags.ACCOUNT_HEADER_PROFILE.name());
 
         if (mHeaderBackgroundScaleType != null) {
             mAccountHeaderBackground.setScaleType(mHeaderBackgroundScaleType);
+        }
+
+        if (mHeaderProfileImageScaleType != null) {
+            mAccountHeaderProfileImage.setScaleType(mHeaderProfileImageScaleType);
         }
 
         // get the text color to use for the text section
@@ -831,8 +885,10 @@ public class AccountHeaderBuilder {
 
         //get the fields for the name
         mCurrentProfileView = (BezelImageView) mAccountHeader.findViewById(R.id.material_drawer_account_header_current);
+        mCurrentBackgroundColor = (ImageView) mAccountHeader.findViewById(R.id.material_drawer_account_header_org_color);
         mCurrentProfileName = (TextView) mAccountHeader.findViewById(R.id.material_drawer_account_header_name);
-        mCurrentProfileEmail = (TextView) mAccountHeader.findViewById(R.id.material_drawer_account_header_email);
+        mCurrentProfileEmail = (TextView) mAccountHeader.findViewById(R.id.material_drawer_account_header_org);
+        mCurrentProfileEmailSubtitle = (TextView) mAccountHeader.findViewById(R.id.material_drawer_account_header_org_subtitle);
 
         //set the typeface for the AccountHeader
         if (mNameTypeface != null) {
@@ -847,8 +903,18 @@ public class AccountHeaderBuilder {
             mCurrentProfileEmail.setTypeface(mTypeface);
         }
 
+        if (mEmailSubtitleTypeface != null) {
+            mCurrentProfileEmailSubtitle.setTypeface(mEmailSubtitleTypeface);
+        } else if (mTypeface != null) {
+            mCurrentProfileEmailSubtitle.setTypeface(mTypeface);
+        }
+
+        // set subtitle into textView
+        StringHolder.applyTo(headerOrgSubtitle, mCurrentProfileEmailSubtitle);
+
         mCurrentProfileName.setTextColor(textColor);
         mCurrentProfileEmail.setTextColor(textColor);
+        mCurrentProfileEmailSubtitle.setTextColor(textColor);
 
         mProfileFirstView = (BezelImageView) mAccountHeader.findViewById(R.id.material_drawer_account_header_small_first);
         mProfileSecondView = (BezelImageView) mAccountHeader.findViewById(R.id.material_drawer_account_header_small_second);
@@ -1060,6 +1126,7 @@ public class AccountHeaderBuilder {
      */
     protected void buildProfiles() {
         mCurrentProfileView.setVisibility(View.INVISIBLE);
+        mCurrentBackgroundColor.setVisibility(View.INVISIBLE);
         mAccountHeaderTextSection.setVisibility(View.INVISIBLE);
         mAccountSwitcherArrow.setVisibility(View.GONE);
         mProfileFirstView.setVisibility(View.GONE);
@@ -1071,9 +1138,10 @@ public class AccountHeaderBuilder {
         mCurrentProfileName.setText("");
         mCurrentProfileEmail.setText("");
 
+
         //we only handle the padding if we are not in compact mode
         if (!mCompactStyle) {
-            mAccountHeaderTextSection.setPadding(0, 0, (int) UIUtils.convertDpToPixel(56, mAccountHeaderTextSection.getContext()), 0);
+            mAccountHeaderTextSection.setPadding((int) UIUtils.convertDpToPixel(56, mAccountHeaderTextSection.getContext()), 0, 0, 0);
         }
 
         handleSelectionView(mCurrentProfile, true);
@@ -1081,6 +1149,8 @@ public class AccountHeaderBuilder {
         if (mCurrentProfile != null) {
             if ((mProfileImagesVisible || mOnlyMainProfileImageVisible) && !mOnlySmallProfileImagesVisible) {
                 setImageOrPlaceholder(mCurrentProfileView, mCurrentProfile.getIcon());
+                setImage(mCurrentBackgroundColor, mCurrentProfile.getBackgroundImage());
+                setBackgroundColor(mAccountHeader, mCurrentProfile.getBackgroundColor());
                 if (mProfileImagesClickable) {
                     mCurrentProfileView.setOnClickListener(onCurrentProfileClickListener);
                     mCurrentProfileView.setOnLongClickListener(onCurrentProfileLongClickListener);
@@ -1089,8 +1159,10 @@ public class AccountHeaderBuilder {
                     mCurrentProfileView.disableTouchFeedback(true);
                 }
                 mCurrentProfileView.setVisibility(View.VISIBLE);
+                mCurrentBackgroundColor.setVisibility(View.VISIBLE);
 
                 mCurrentProfileView.invalidate();
+                mCurrentBackgroundColor.invalidate();
             } else if (mCompactStyle) {
                 mCurrentProfileView.setVisibility(View.GONE);
             }
@@ -1099,9 +1171,11 @@ public class AccountHeaderBuilder {
             handleSelectionView(mCurrentProfile, true);
             mAccountSwitcherArrow.setVisibility(View.VISIBLE);
             mCurrentProfileView.setTag(R.id.material_drawer_profile_header, mCurrentProfile);
+            mCurrentBackgroundColor.setTag(R.id.material_drawer_account_header_org_color, mCurrentProfile);
 
             StringHolder.applyTo(mCurrentProfile.getName(), mCurrentProfileName);
             StringHolder.applyTo(mCurrentProfile.getEmail(), mCurrentProfileEmail);
+
 
             if (mProfileFirst != null && mProfileImagesVisible && !mOnlyMainProfileImageVisible) {
                 setImageOrPlaceholder(mProfileFirstView, mProfileFirst.getIcon());
@@ -1151,6 +1225,7 @@ public class AccountHeaderBuilder {
             if (mCurrentProfile != null) {
                 StringHolder.applyTo(mCurrentProfile.getName(), mCurrentProfileName);
                 StringHolder.applyTo(mCurrentProfile.getEmail(), mCurrentProfileEmail);
+                StringHolder.applyTo(mCurrentProfile.getOrgSubtitle(), mCurrentProfileEmailSubtitle);
             }
         }
 
@@ -1163,6 +1238,7 @@ public class AccountHeaderBuilder {
         }
         if (!mSelectionSecondLineShown) {
             mCurrentProfileEmail.setVisibility(View.GONE);
+            mCurrentProfileEmailSubtitle.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(mSelectionSecondLine)) {
             mCurrentProfileEmail.setText(mSelectionSecondLine);
@@ -1186,6 +1262,16 @@ public class AccountHeaderBuilder {
         }
     }
 
+    private void setBackgroundColor(View mAccountHeader, int backgroundColor) {
+
+        if (backgroundColor == 0) {
+            mAccountHeader.setBackgroundColor(Color.TRANSPARENT);
+        } else {
+            mAccountHeader.setBackgroundColor(backgroundColor);
+        }
+
+    }
+
     /**
      * small helper method to set an profile image or a placeholder
      *
@@ -1199,6 +1285,25 @@ public class AccountHeaderBuilder {
         iv.setImageDrawable(DrawerImageLoader.getInstance().getImageLoader().placeholder(iv.getContext(), DrawerImageLoader.Tags.PROFILE.name()));
         //set the real image (probably also the uri)
         ImageHolder.applyTo(imageHolder, iv, DrawerImageLoader.Tags.PROFILE.name());
+    }
+
+    /**
+     * small helper method to set an profile image or a placeholder
+     *
+     * @param iv
+     * @param imageHolder
+     */
+    private void setImage(ImageView iv, ImageHolder imageHolder) {
+
+        //cancel previous started image loading processes
+        DrawerImageLoader.getInstance().cancelImage(iv);
+
+        if (imageHolder == null) {
+            iv.setImageDrawable(null);
+        } else {
+            //set the real image (probably also the uri)
+            ImageHolder.applyTo(imageHolder, iv, DrawerImageLoader.Tags.PROFILE_ORG_BACKGROUND.name());
+        }
     }
 
     /**
@@ -1485,4 +1590,5 @@ public class AccountHeaderBuilder {
             buildDrawerSelectionList();
         }
     }
+
 }

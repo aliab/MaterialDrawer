@@ -2,6 +2,7 @@ package com.mikepenz.materialdrawer.model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -36,16 +37,18 @@ public class ProfileSettingDrawerItem extends AbstractDrawerItem<ProfileSettingD
 
     private StringHolder name;
     private StringHolder email;
+    private StringHolder orgSubtitle;
 
     private boolean iconTinted = false;
-
     private ColorHolder selectedColor;
     private ColorHolder textColor;
+
     private ColorHolder iconColor;
 
     private Typeface typeface = null;
-
     private boolean selectable = false;
+    private ImageHolder profileBackgroundImage;
+    private int backgroundColor;
 
     @Override
     public ProfileSettingDrawerItem withIcon(Drawable icon) {
@@ -68,6 +71,36 @@ public class ProfileSettingDrawerItem extends AbstractDrawerItem<ProfileSettingD
     @Override
     public ProfileSettingDrawerItem withIcon(IIcon iicon) {
         this.icon = new ImageHolder(iicon);
+        return this;
+    }
+
+    @Override
+    public ProfileSettingDrawerItem withBackgroundImage(Drawable icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
+    public ProfileSettingDrawerItem withBackgroundImage(Bitmap icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
+    public ProfileSettingDrawerItem withBackgroundImage(@DrawableRes int icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
+    public ProfileSettingDrawerItem withBackgroundImage(String icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
+    public ProfileSettingDrawerItem withBackgroundImage(Uri icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
         return this;
     }
 
@@ -178,6 +211,17 @@ public class ProfileSettingDrawerItem extends AbstractDrawerItem<ProfileSettingD
         return email;
     }
 
+    @Override
+    public ProfileSettingDrawerItem withOrgSubtitle(String orgSubtitle) {
+        this.orgSubtitle = new StringHolder(orgSubtitle);
+        return this;
+    }
+
+    @Override
+    public StringHolder getOrgSubtitle() {
+        return orgSubtitle;
+    }
+
     public StringHolder getDescription() {
         return email;
     }
@@ -189,6 +233,28 @@ public class ProfileSettingDrawerItem extends AbstractDrawerItem<ProfileSettingD
     @Override
     public boolean isSelectable() {
         return selectable;
+    }
+
+    @Override
+    public ImageHolder getBackgroundImage() {
+        return profileBackgroundImage;
+    }
+
+    @Override
+    public int getBackgroundColor() {
+        return this.backgroundColor;
+    }
+
+    @Override
+    public ProfileSettingDrawerItem withBackgroundColor(@ColorInt int color) {
+        this.backgroundColor = color;
+        return this;
+    }
+
+    @Override
+    public ProfileSettingDrawerItem withBackgroundColor(String color) {
+        this.backgroundColor = Color.parseColor(color);
+        return this;
     }
 
     public ProfileSettingDrawerItem withSelectable(boolean selectable) {

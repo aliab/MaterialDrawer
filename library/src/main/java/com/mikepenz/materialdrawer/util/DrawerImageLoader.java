@@ -12,7 +12,8 @@ public class DrawerImageLoader {
     public enum Tags {
         PROFILE,
         PROFILE_DRAWER_ITEM,
-        ACCOUNT_HEADER
+        ACCOUNT_HEADER,
+        PROFILE_ORG_BACKGROUND, ACCOUNT_HEADER_PROFILE
     }
 
     private static DrawerImageLoader SINGLETON = null;

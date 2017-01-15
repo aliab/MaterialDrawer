@@ -1,8 +1,10 @@
 package com.mikepenz.materialdrawer.model;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.ColorInt;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
@@ -27,6 +29,8 @@ public class MiniProfileDrawerItem extends AbstractDrawerItem<MiniProfileDrawerI
     protected ImageHolder icon;
 
     protected DimenHolder customHeight;
+    private ImageHolder profileBackgroundImage;
+    private int backgroundColor;
 
     public MiniProfileDrawerItem() {
         withSelectable(false);
@@ -55,6 +59,16 @@ public class MiniProfileDrawerItem extends AbstractDrawerItem<MiniProfileDrawerI
 
     @Override
     public StringHolder getEmail() {
+        return null;
+    }
+
+    @Override
+    public MiniProfileDrawerItem withOrgSubtitle(String orgSubtitle) {
+        return null;
+    }
+
+    @Override
+    public StringHolder getOrgSubtitle() {
         return null;
     }
 
@@ -94,6 +108,36 @@ public class MiniProfileDrawerItem extends AbstractDrawerItem<MiniProfileDrawerI
         return this;
     }
 
+    @Override
+    public MiniProfileDrawerItem withBackgroundImage(Drawable icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
+    public MiniProfileDrawerItem withBackgroundImage(Bitmap icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
+    public MiniProfileDrawerItem withBackgroundImage(@DrawableRes int icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
+    public MiniProfileDrawerItem withBackgroundImage(String icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
+    @Override
+    public MiniProfileDrawerItem withBackgroundImage(Uri icon) {
+        this.profileBackgroundImage = new ImageHolder(icon);
+        return this;
+    }
+
     public MiniProfileDrawerItem withCustomHeightRes(@DimenRes int customHeightRes) {
         this.customHeight = DimenHolder.fromResource(customHeightRes);
         return this;
@@ -117,6 +161,28 @@ public class MiniProfileDrawerItem extends AbstractDrawerItem<MiniProfileDrawerI
     @Override
     public ImageHolder getIcon() {
         return icon;
+    }
+
+    @Override
+    public ImageHolder getBackgroundImage() {
+        return profileBackgroundImage;
+    }
+
+    @Override
+    public int getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    @Override
+    public MiniProfileDrawerItem withBackgroundColor(@ColorInt int color) {
+        this.backgroundColor = color;
+        return this;
+    }
+
+    @Override
+    public MiniProfileDrawerItem withBackgroundColor(String color) {
+        this.backgroundColor = Color.parseColor(color);
+        return this;
     }
 
     @Override

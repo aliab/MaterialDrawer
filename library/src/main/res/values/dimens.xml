@@ -19,7 +19,8 @@
     <dimen name="material_drawer_account_header_height_compact">72dp</dimen>
     <dimen name="material_drawer_account_header_horizontal_top">16dp</dimen>
     <dimen name="material_drawer_account_header_horizontal_bottom">4dp</dimen>
-    <dimen name="material_drawer_account_header_selected">64dp</dimen>
+    <dimen name="material_drawer_account_header_profile">64dp</dimen>
+    <dimen name="material_drawer_account_header_selected">32dp</dimen>
     <dimen name="material_drawer_account_header_secondary">40dp</dimen>
     <dimen name="material_drawer_account_header_compact">56dp</dimen>
     <dimen name="material_drawer_account_header_text">14sp</dimen>

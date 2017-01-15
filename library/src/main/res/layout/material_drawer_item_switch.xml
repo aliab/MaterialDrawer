@@ -11,17 +11,18 @@
     android:paddingRight="@dimen/material_drawer_vertical_padding"
     android:paddingStart="@dimen/material_drawer_vertical_padding">
 
-    <ImageView
-        android:id="@+id/material_drawer_icon"
-        android:layout_width="@dimen/material_drawer_item_primary_icon"
-        android:layout_height="@dimen/material_drawer_item_primary"
-        android:layout_gravity="center_vertical"
-        android:paddingBottom="@dimen/material_drawer_item_primary_icon_padding"
-        android:paddingEnd="@dimen/material_drawer_item_primary_icon_padding_right"
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/material_drawer_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
         android:paddingLeft="0dp"
-        android:paddingRight="@dimen/material_drawer_item_primary_icon_padding_right"
-        android:paddingStart="0dp"
-        android:paddingTop="@dimen/material_drawer_item_primary_icon_padding" />
+        android:paddingRight="@dimen/material_drawer_padding"
+        android:textOff=""
+        android:textOn=""
+        android:textSize="@dimen/material_drawer_item_primary_text"
+        app:showText="false" />
+
 
     <LinearLayout
         android:layout_width="0dp"
@@ -35,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:gravity="center_vertical|start"
+            android:gravity="center_vertical|right"
             android:lines="1"
             android:singleLine="true"
             android:textDirection="anyRtl"
@@ -47,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:gravity="center_vertical|start"
+            android:gravity="center_vertical|right"
             android:lines="1"
             android:singleLine="true"
             android:textDirection="anyRtl"
@@ -55,16 +56,14 @@
             tools:text="Some drawer text" />
     </LinearLayout>
 
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/material_drawer_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical|end"
-        android:paddingEnd="0dp"
-        android:paddingLeft="@dimen/material_drawer_padding"
+    <ImageView
+        android:id="@+id/material_drawer_icon"
+        android:layout_width="@dimen/material_drawer_item_primary_icon"
+        android:layout_height="@dimen/material_drawer_item_primary"
+        android:layout_gravity="center_vertical"
+        android:paddingBottom="@dimen/material_drawer_item_primary_icon_padding"
+        android:paddingLeft="@dimen/material_drawer_item_primary_icon_padding_right"
         android:paddingRight="0dp"
-        android:textOff=""
-        android:textOn=""
-        android:textSize="@dimen/material_drawer_item_primary_text"
-        app:showText="false" />
+        android:paddingTop="@dimen/material_drawer_item_primary_icon_padding" />
+
 </LinearLayout>

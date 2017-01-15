@@ -1,64 +1,93 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/material_drawer_account_header_height"
-    android:clickable="true">
+    android:clickable="true"
+    tools:ignore="RtlHardcoded">
 
     <ImageView
         android:id="@+id/material_drawer_account_header_background"
         android:layout_width="match_parent"
         android:layout_height="@dimen/material_drawer_account_header_height"
-        android:scaleType="fitXY" />
+        android:scaleType="centerCrop"
+        tools:src="@drawable/default_bg" />
 
     <RelativeLayout
         android:id="@+id/material_drawer_account_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/material_drawer_account_header_height">
 
+        <ImageView
+            android:id="@+id/material_drawer_account_header_org_color"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_drawer_account_header_height"
+            android:scaleType="centerCrop" />
+
+        <com.mikepenz.materialdrawer.view.BezelImageView
+            android:id="@+id/material_drawer_account_header_profile"
+            android:layout_width="@dimen/material_drawer_account_header_profile"
+            android:layout_height="@dimen/material_drawer_account_header_profile"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="@dimen/material_drawer_account_header_horizontal_bottom"
+            android:layout_marginRight="@dimen/material_drawer_vertical_padding"
+            android:layout_marginTop="@dimen/material_drawer_account_header_horizontal_top"
+            android:clickable="true"
+            android:elevation="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_avatar" />
+
         <com.mikepenz.materialdrawer.view.BezelImageView
             android:id="@+id/material_drawer_account_header_current"
             android:layout_width="@dimen/material_drawer_account_header_selected"
             android:layout_height="@dimen/material_drawer_account_header_selected"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="@dimen/material_drawer_account_header_horizontal_bottom"
-            android:layout_marginLeft="@dimen/material_drawer_vertical_padding"
-            android:layout_marginTop="@dimen/material_drawer_account_header_horizontal_top"
+            android:layout_alignBottom="@+id/material_drawer_account_header_profile"
+            android:layout_alignLeft="@+id/material_drawer_account_header_profile"
+            android:layout_marginLeft="-17dp"
             android:clickable="true"
-            android:elevation="2dp" />
+            android:elevation="5dp"
+            tools:src="@drawable/default_avatar" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/material_drawer_account_header_current"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/material_drawer_account_header_horizontal_top"
             android:gravity="right">
 
             <com.mikepenz.materialdrawer.view.BezelImageView
                 android:id="@+id/material_drawer_account_header_small_first"
                 android:layout_width="@dimen/material_drawer_account_header_secondary"
                 android:layout_height="@dimen/material_drawer_account_header_secondary"
-                android:layout_marginRight="@dimen/material_drawer_vertical_padding"
+                android:layout_marginLeft="@dimen/material_drawer_vertical_padding"
                 android:clickable="true"
                 android:elevation="2dp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:src="@drawable/default_avatar"
+                tools:visibility="visible" />
 
             <com.mikepenz.materialdrawer.view.BezelImageView
                 android:id="@+id/material_drawer_account_header_small_second"
                 android:layout_width="@dimen/material_drawer_account_header_secondary"
                 android:layout_height="@dimen/material_drawer_account_header_secondary"
-                android:layout_marginRight="@dimen/material_drawer_vertical_padding"
+                android:layout_marginLeft="@dimen/material_drawer_vertical_padding"
                 android:clickable="true"
                 android:elevation="2dp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:src="@drawable/default_avatar"
+                tools:visibility="visible" />
 
             <com.mikepenz.materialdrawer.view.BezelImageView
                 android:id="@+id/material_drawer_account_header_small_third"
                 android:layout_width="@dimen/material_drawer_account_header_secondary"
                 android:layout_height="@dimen/material_drawer_account_header_secondary"
-                android:layout_marginRight="@dimen/material_drawer_vertical_padding"
+                android:layout_marginLeft="@dimen/material_drawer_vertical_padding"
                 android:clickable="true"
                 android:elevation="2dp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:src="@drawable/default_avatar"
+                tools:visibility="visible" />
         </LinearLayout>
 
         <LinearLayout
@@ -66,16 +95,14 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="@dimen/material_drawer_padding"
-            android:layout_toLeftOf="@+id/material_drawer_account_header_text_switcher"
+            android:layout_marginRight="@dimen/material_drawer_vertical_padding"
+            android:layout_toRightOf="@+id/material_drawer_account_header_text_switcher"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingEnd="56dp"
-            android:paddingLeft="0dp"
-            android:paddingRight="56dp"
-            android:paddingStart="0dp">
+            android:paddingLeft="56dp"
+            android:paddingRight="0dp">
 
             <TextView
                 android:id="@+id/material_drawer_account_header_name"
@@ -83,19 +110,41 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/material_drawer_vertical_padding"
                 android:fontFamily="sans-serif-medium"
+                android:gravity="right"
                 android:lines="1"
                 android:maxLines="1"
-                android:textSize="@dimen/material_drawer_account_header_text" />
+                android:textSize="@dimen/material_drawer_account_header_text"
+                tools:text="علی عبداللهی" />
 
-            <TextView
-                android:id="@+id/material_drawer_account_header_email"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/material_drawer_vertical_padding"
-                android:fontFamily="sans-serif"
-                android:lines="1"
-                android:maxLines="1"
-                android:textSize="@dimen/material_drawer_account_header_text" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/material_drawer_account_header_org"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/material_drawer_vertical_padding"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif"
+                    android:gravity="right"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:textSize="@dimen/material_drawer_account_header_text"
+                    tools:text="همسا" />
+
+                <TextView
+                    android:id="@+id/material_drawer_account_header_org_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:text="@string/your_active_org"
+                    android:textSize="@dimen/material_drawer_account_header_text" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -104,9 +153,9 @@
             android:layout_width="@dimen/material_drawer_account_header_dropdown"
             android:layout_height="@dimen/material_drawer_account_header_dropdown"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_marginBottom="@dimen/material_drawer_account_header_dropdown_margin_bottom"
-            android:layout_marginRight="@dimen/material_drawer_vertical_padding" />
+            android:layout_marginLeft="@dimen/material_drawer_vertical_padding" />
 
     </RelativeLayout>
 </FrameLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.v4.view.ViewCompat;
@@ -82,6 +83,16 @@ public class AccountDividerDrawerItem extends AbstractDrawerItem<AccountDividerD
     }
 
     @Override
+    public AccountDividerDrawerItem withOrgSubtitle(String orgSubtitle) {
+        return null;
+    }
+
+    @Override
+    public StringHolder getOrgSubtitle() {
+        return null;
+    }
+
+    @Override
     public AccountDividerDrawerItem withIcon(Drawable icon) {
         return null;
     }
@@ -112,7 +123,52 @@ public class AccountDividerDrawerItem extends AbstractDrawerItem<AccountDividerD
     }
 
     @Override
+    public AccountDividerDrawerItem withBackgroundImage(Drawable icon) {
+        return null;
+    }
+
+    @Override
+    public AccountDividerDrawerItem withBackgroundImage(Bitmap icon) {
+        return null;
+    }
+
+    @Override
+    public AccountDividerDrawerItem withBackgroundImage(@DrawableRes int icon) {
+        return null;
+    }
+
+    @Override
+    public AccountDividerDrawerItem withBackgroundImage(String icon) {
+        return null;
+    }
+
+    @Override
+    public AccountDividerDrawerItem withBackgroundImage(Uri icon) {
+        return null;
+    }
+
+    @Override
     public ImageHolder getIcon() {
+        return null;
+    }
+
+    @Override
+    public ImageHolder getBackgroundImage() {
+        return null;
+    }
+
+    @Override
+    public int getBackgroundColor() {
+        return 0;
+    }
+
+    @Override
+    public AccountDividerDrawerItem withBackgroundColor(@ColorInt int color) {
+        return null;
+    }
+
+    @Override
+    public AccountDividerDrawerItem withBackgroundColor(String color) {
         return null;
     }
 

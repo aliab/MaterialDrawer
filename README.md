@@ -23,7 +23,9 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-    compile 'com.github.aliab:circular-music-progressbar:v1.1.1'
+     compile('com.github.hamsaadev:MaterialDrawer:v6.0.1@aar') {
+        transitive = true
+    }
 }
 ```
 

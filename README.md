@@ -1,5 +1,5 @@
 # Hamsaa RTL Material Drawer
-[![](https://jitpack.io/v/hamsaadev/MaterialDrawer.svg)](https://jitpack.io/#hamsaadev/MaterialDrawer)
+[![](https://jitpack.io/v/hamsaadev/HamsaMaterialDrawerAndroid.svg)](https://jitpack.io/#hamsaadev/HamsaMaterialDrawerAndroid)
 
 ![Hero Image](https://raw.githubusercontent.com/hamsaadev/MaterialDrawer/develop/graphic/screen0.jpg)
 
@@ -25,7 +25,7 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-     compile('com.github.hamsaadev:MaterialDrawer:v6.0.1@aar') {
+     compile('com.github.hamsaadev:HamsaMaterialDrawerAndroid:v6.0.1@aar') {
         transitive = true
     }
 }

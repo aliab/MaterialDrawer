@@ -1,6 +1,8 @@
 # Hamsaa RTL Material Drawer
 [![](https://jitpack.io/v/hamsaadev/MaterialDrawer.svg)](https://jitpack.io/#hamsaadev/MaterialDrawer)
 
+![Hero Image](https://raw.githubusercontent.com/hamsaadev/MaterialDrawer/develop/graphic/screen0.jpg)
+
 ## Description
 
 Fully RTL and customized material navigation drawer

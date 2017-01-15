@@ -41,7 +41,7 @@ Great. Your drawer is now ready to use.
 
 ## Changelog
 
-### v1.0.0
+### v6.0.1
 
  * Initial Release
 
